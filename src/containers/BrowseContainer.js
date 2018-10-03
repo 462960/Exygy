@@ -1,16 +1,16 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { Browse } from "../components/Browse";
+import { Loader } from "../components/Loader";
 
 export class BrowseContainer extends React.Component {
   state = {
-    data: [],
     searchInput: ""
   };
 
   componentDidMount() {
     fetch("http://exygy-challenge-backend.herokuapp.com/documents?api_key=123")
       .then(res => res.json())
-      .then(data => this.setState({ data }));
+      .then(dataList => this.setState({ dataList }));
   }
 
   getInput = e => {
@@ -24,12 +24,19 @@ export class BrowseContainer extends React.Component {
   };
 
   render() {
+    const { dataList } = this.state;
     return (
-      <Browse
-        {...this.state}
-        getInput={this.getInput}
-        queryCancellation={this.queryCancellation}
-      />
+      <Fragment>
+        {!Boolean(dataList) ? (
+          <Loader />
+        ) : (
+          <Browse
+            {...this.state}
+            getInput={this.getInput}
+            queryCancellation={this.queryCancellation}
+          />
+        )}
+      </Fragment>
     );
   }
 }

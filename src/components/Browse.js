@@ -2,11 +2,12 @@ import React, { PureComponent } from "react";
 
 export class Browse extends PureComponent {
   render() {
-    const { getInput, data, searchInput, queryCancellation } = this.props;
+    const { getInput, dataList, searchInput, queryCancellation } = this.props;
+    const filteredData = (dataList || []).filter(i =>
+      i.name.includes(searchInput)
+    );
 
-    const filteredData = data.filter(i => i.name.includes(searchInput));
-
-    const slatItem = (filteredData || data).map(x => (
+    const slatItem = (filteredData || dataList).map(x => (
       <div key={x.id} className="slat row align-middle collapse  excel">
         <div className="slat-avatar item-avatar">
           <span className="ui-icon i-excel i-xlarge ">
@@ -112,22 +113,24 @@ export class Browse extends PureComponent {
                   onClick={queryCancellation}
                   className="ui-icon i-medium-gray i-base search-box-close-icon"
                 >
-                  <svg>
-                    <use xlinkHref="#i-close-large">
-                      <svg
-                        id="i-close-large"
-                        viewBox="0 0 32 32"
-                        width="100%"
-                        height="100%"
-                      >
-                        <title>close-large</title>
-                        <path
-                          className="path1"
-                          d="M18.4 16l13.1-13.1c0.7-0.7 0.7-1.7 0-2.4s-1.7-0.7-2.4 0l-13.1 13.1-13.1-13.1c-0.7-0.7-1.7-0.7-2.4 0s-0.7 1.7 0 2.4l13.1 13.1-13.1 13.1c-0.7 0.7-0.7 1.7 0 2.4s1.7 0.7 2.4 0l13.1-13.1 13.1 13.1c0.7 0.7 1.7 0.7 2.4 0s0.7-1.7 0-2.4l-13.1-13.1z"
-                        />
-                      </svg>
-                    </use>
-                  </svg>
+                  {Boolean(searchInput) ? (
+                    <svg>
+                      <use xlinkHref="#i-close-large">
+                        <svg
+                          id="i-close-large"
+                          viewBox="0 0 32 32"
+                          width="100%"
+                          height="100%"
+                        >
+                          <title>close-large</title>
+                          <path
+                            className="path1"
+                            d="M18.4 16l13.1-13.1c0.7-0.7 0.7-1.7 0-2.4s-1.7-0.7-2.4 0l-13.1 13.1-13.1-13.1c-0.7-0.7-1.7-0.7-2.4 0s-0.7 1.7 0 2.4l13.1 13.1-13.1 13.1c-0.7 0.7-0.7 1.7 0 2.4s1.7 0.7 2.4 0l13.1-13.1 13.1 13.1c0.7 0.7 1.7 0.7 2.4 0s0.7-1.7 0-2.4l-13.1-13.1z"
+                          />
+                        </svg>
+                      </use>
+                    </svg>
+                  ) : null}
                 </span>
               </div>
             </div>

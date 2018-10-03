@@ -47,6 +47,7 @@ export const TopBar = ({ data, firstLetter, lastLetter }) => {
               <a
                 href="https://github.com/462960/Exygy/tree/gitHub"
                 target="_blank"
+                rel="noopener noreferrer"
               >
                 <span>GitHub</span>
               </a>
@@ -95,7 +96,7 @@ export const TopBar = ({ data, firstLetter, lastLetter }) => {
               </Link>
             </li>
             <li>
-              <a className="nav-mobile-toggler">
+              <div style={{ cursor: "pointer" }} className="nav-mobile-toggler">
                 <span className="ui-icon i-primary i-medium icon-open">
                   <svg>
                     <use xlinkHref="#i-menu">
@@ -140,7 +141,7 @@ export const TopBar = ({ data, firstLetter, lastLetter }) => {
                     </use>
                   </svg>
                 </span>
-              </a>
+              </div>
             </li>
           </ul>
         </nav>

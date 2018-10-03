@@ -77,19 +77,23 @@ class App extends React.Component {
           <Route
             exact
             path="/"
-            render={() => ( <Homepage data={data} firstName={firstName} />)}
+            render={() => <Homepage data={data} firstName={firstName} />}
           />
           <Route path="/browse" render={() => <BrowseContainer />} />
           <Route
             path="/login"
-            render={() => (status === 200 ? <Redirect push to="/profile"/> :
-              <Login
-                signIn={this.signIn}
-                takeInput={this.takeInput}
-                history={this.props.history}
-                status={status}
-              />
-            )}
+            render={() =>
+              status === 200 ? (
+                <Redirect push to="/profile" />
+              ) : (
+                <Login
+                  signIn={this.signIn}
+                  takeInput={this.takeInput}
+                  history={this.props.history}
+                  status={status}
+                />
+              )
+            }
           />
           <Route
             path="/profile"
